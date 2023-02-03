@@ -12,6 +12,10 @@ interface IStrengthParams {
   [key: string]: boolean;
 }
 
+interface IClassPersence {
+  [key: string]: boolean;
+}
+
 @Component({
   selector: 'app-password-form',
   templateUrl: './password-form.component.html',
@@ -29,27 +33,27 @@ export class PasswordFormComponent {
 
   constructor(private formBuilder: FormBuilder) {}
 
-  public get appendSectionClassEasy() {
+  public get classPersenceEasy(): IClassPersence {
     return {
       red:
         this.passwordControl.hasError('easy') ||
-        this.authForm.get('password')?.errors!['minlength'],
+        this.passwordControl.hasError('minlength'),
       yellow: this.passwordControl.hasError('medium'),
       green: this.passwordControl.hasError('hard'),
     };
   }
 
-  public get appendSectionClassMedium() {
+  public get classPersenceMedium():IClassPersence {
     return {
-      red: this.authForm.get('password')?.errors!['minlength'],
+      red: this.passwordControl.hasError('minlength'),
       yellow: this.passwordControl.hasError('medium'),
       green: this.passwordControl.hasError('hard'),
     };
   }
 
-  public get appendSectionClassHard() {
+  public get classPersenceHard(): IClassPersence {
     return {
-      red: this.authForm.get('password')?.errors!['minlength'],
+      red: this.passwordControl.hasError('minlength'),
       green: this.passwordControl.hasError('hard'),
     };
   }
